@@ -1,0 +1,2 @@
+# timewarrior-snap
+Timewarrior is Free and Open Source Software that tracks time from the command line.
