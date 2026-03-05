@@ -1,0 +1,42 @@
+title: Timewarrior
+name: timew
+base: core24
+version: '1.9.1'
+summary: Command-line time tracking
+license: MIT
+
+description: |
+  Timewarrior is a command-line time tracker that lets you track time and
+  generate summary reports. This snap builds the official Timewarrior release
+  tarball. Snap-specific issues should be reported to github.com/nqnz/timewarrior-snap/issues
+
+contact: support@gothenburgbitfactory.org
+donation: https://github.com/sponsors/GothenburgBitFactory
+issues: https://github.com/GothenburgBitFactory/timewarrior/issues
+source-code: https://github.com/GothenburgBitFactory/timewarrior
+website: https://timewarrior.net
+
+grade: stable
+confinement: strict
+
+apps:
+  timew:
+    command: usr/bin/timew
+    plugs:
+      - home
+      - network
+    environment:
+      TIMEWARRIORDB: $SNAP_USER_COMMON/.timewarrior
+
+parts:
+  timew:
+    plugin: cmake
+    source: https://github.com/GothenburgBitFactory/timewarrior/releases/download/v$SNAPCRAFT_PROJECT_VERSION/timew-$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    build-packages:
+      - g++
+      - make
+      - cmake
+      - asciidoctor
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
